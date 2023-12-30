@@ -1,8 +1,11 @@
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../contexts/AppContext";
 
 
 export default function Header(){
+    const { isLoggedIn } = useAppContext();
+
     return (
         <header className='bg-slate-200 shadow-md' >
            
@@ -15,7 +18,6 @@ export default function Header(){
                  </h1>
                 </Link>
                 
-
                 <form className='bg-slate-100 p-3 rounded-lg flex items-center'>
                     <input
                      type="text" 
@@ -25,24 +27,56 @@ export default function Header(){
                 </form>
 
                 <ul className="flex gap-4">
-                <Link to='/'>
-                    <li className="hidden sm:inline text-slate-700 hover:underline">Home </li>
-                </Link>
-                <Link to='/about'>
-                     <li className="hidden sm:inline text-slate-700 hover:underline">
-                     About 
-                     </li>
-                </Link>
-                <Link to='/sign-in'>
+               
+                    <Link to='/'>
+                        <li className="hidden sm:inline text-slate-700 hover:underline">Home </li>
+                    </Link>
+            
+                    {/* <Link to='/about'>
+                        <li className="hidden sm:inline text-slate-700 hover:underline">
+                        About 
+                        </li>
+                    </Link> */}
+            
+                    { isLoggedIn ? (<>
+                        <Link to='/my-bookings'>
+                            <li className="sm:inline text-slate-700 hover:underline"> 
+                            My Bookings
+                            </li>
+                       </Link>
+                       {/* <Link to='/my-hotels'>
+                            <li className="sm:inline text-slate-700 hover:underline"> 
+                            My Hotels
+                            </li>
+                       </Link> */}
+                       <button> Sign out</button>
+
+                    </> ): (
+                        <>
+                        <Link to='/about'>
+                        <li className="hidden sm:inline text-slate-700 hover:underline">
+                        About 
+                        </li>
+                    </Link>
+                        <Link to='/sign-in'>
+                        <li className="sm:inline text-slate-700 hover:underline"> 
+                        Sign In
+                        </li>
+                        </Link>
+                    </>
+                    ) }
+                    
+               
+                {/* <Link to='/sign-in'>
                       <li className="sm:inline text-slate-700 hover:underline"> 
                       Sign In
                       </li>
-                </Link>
-                <Link to='/sign-up'>
+                </Link> */}
+                {/* <Link to='/sign-up'>
                       <li className="sm:inline text-slate-700 hover:underline"> 
                       Sign Up
                       </li>
-                </Link>
+                </Link> */}
                       
                 </ul>
 

@@ -57,7 +57,6 @@ export const signup = [
 }]
 
 
-
 export const signin = [
     body("email", "Email is required").isEmail(),
     body("password", "Password with 6 or more characters required").isLength({min:6}),
@@ -110,4 +109,6 @@ export const signin = [
 
 }]
 
-
+export const validtoken = (req, res) =>{
+    res.status(200).send({userId: req.userId});
+}

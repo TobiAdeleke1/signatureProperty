@@ -6,26 +6,29 @@ import * as apiClient from '../api-client';
 
 export default function SignIn () {
     const navigate = useNavigate();
-    // const {error, setError} = useState(null);
-    const { register,setError, handleSubmit, formState:{ errors } } = useForm();
+    const [error, setError] = useState('o');
+    const { register,  handleSubmit, formState:{ errors } } = useForm();
 
-
+    function handleSetErr(err){
+        setError(err.message);
+        console.log(error);
+    } 
     // State is built to the mutation hook, so no need to manage useHook
     const mutation = useMutation(apiClient.signinClient, {
         onSuccess: () =>{
             console.log("Login Successful!");
             navigate("/");
         },
-        onError: (error) =>{
-            console.log(error.message);
-            setError(error);
-            console.log(error.message);
+        onError: (err) =>{
+            console.log(err);
+            setError(err.message); 
+            
         },
     });
-
    
     const onSubmit = handleSubmit((data)=>{
         mutation.mutate(data); // pass data to use mutate and then to our server
+        
     });
     return (
         <div className='p-3 max-w-lg mx-auto'>
@@ -72,7 +75,7 @@ export default function SignIn () {
                     <span className='text-blue-700'> Sign Up</span>
                 </Link>
             </div>
-           
+            {error && <p className='text-red-500 mt-5'>{error}</p>}
         </div>
     )
 }

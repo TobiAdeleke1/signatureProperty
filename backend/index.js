@@ -3,13 +3,16 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRouter from './routes/auth.js';
-// import userRouter from './routes/users.js'
+// import userRouter from './routes/users.js';
+import cookieParser from "cookie-parser";
+
 dotenv.config();
 
 mongoose.connect(process.env.DATABASE_URL).then(()=>{
     console.log("Connected to DB");
 });
 
+const PORT = 3000;
 const app = express();
 app.use(express.json()); 
 app.use(express.urlencoded({extended:true})); 
@@ -18,7 +21,8 @@ app.use(cors({
     credentials: true,
 
 })); 
-const PORT = 3000;
+app.use(cookieParser());
+
 
 app.use("/api/auth", authRouter);
 // app.use("/api/users", userRouter);
