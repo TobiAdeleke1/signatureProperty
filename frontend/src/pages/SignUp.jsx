@@ -1,17 +1,19 @@
 import React from 'react';
-import {Link } from 'react-router-dom'
+import {Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as apiClient from '../api-client';
 
 export default function SignUp () {
-
+    const navigate = useNavigate();
     const { register, watch, handleSubmit, formState:{ errors } } = useForm();
+
 
     // State is built to the mutation hook, so no need to manage useHook
     const mutation = useMutation(apiClient.signupClient, {
         onSuccess: () =>{
             console.log("Registration Successful!");
+            navigate("/sign-in");
         },
         onError: (error) =>{
             console.log(error.message);
