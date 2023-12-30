@@ -3,7 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRouter from './routes/auth.js';
-import userRouter from './routes/users.js'
+// import userRouter from './routes/users.js'
 dotenv.config();
 
 mongoose.connect(process.env.DATABASE_URL).then(()=>{
@@ -13,11 +13,15 @@ mongoose.connect(process.env.DATABASE_URL).then(()=>{
 const app = express();
 app.use(express.json()); 
 app.use(express.urlencoded({extended:true})); 
-app.use(cors()); 
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+
+})); 
 const PORT = 3000;
 
 app.use("/api/auth", authRouter);
-app.use("/api/users", userRouter);
+// app.use("/api/users", userRouter);
 
 
 app.listen(PORT, () =>{
