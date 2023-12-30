@@ -9,8 +9,7 @@ export const signup = [
     body("lastName", "Last Name is required").isString(),
     body("email", "Email is required").isEmail(),
     body("password", "Password with 6 or more characters required").isLength({min:6}),
-async(req, res, next) =>{
-    console.log(req.body);
+    async(req, res, next) =>{
 
     const errors = validationResult(req);
 
@@ -50,7 +49,7 @@ async(req, res, next) =>{
         });
 
     
-        return res.sendStatus(200);
+        return res.status(200).send({message: "User registered OK"});
 
     }catch(error){
         res.status(500).send({message: "Internal Server Error"});

@@ -1,13 +1,26 @@
 import React from 'react';
 import {Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import * as apiClient from '../api-client';
 
 export default function SignUp () {
 
     const { register, watch, handleSubmit, formState:{ errors } } = useForm();
 
+    // State is built to the mutation hook, so no need to manage useHook
+    const mutation = useMutation(apiClient.signupClient, {
+        onSuccess: () =>{
+            console.log("Registration Successful!");
+        },
+        onError: (error) =>{
+            console.log(error.message);
+        },
+    });
+
+
     const onSubmit = handleSubmit((data)=>{
-        console.log(data);
+        mutation.mutate(data); // pass data to use mutate and then to our server
     });
     return (
         <div className='p-3 max-w-lg mx-auto'>
@@ -21,7 +34,6 @@ export default function SignUp () {
                     First Name
                 <input type='text' className='border p-3 rounded-lg w-full'
                   id='firstName' {...register("firstName", {required: "This field is required"})}/>
-                     {/* Shorthand for if the left is true do the right */}
                   {errors.firstName && (
                         <span className='text-red-500'> {errors.firstName.message }</span>
                     ) }
@@ -66,7 +78,7 @@ export default function SignUp () {
                     Confirm Password
                     <input type='password'
                      className='border p-3 rounded-lg w-full'
-                     id='password'
+                     id='confirmpassword'
                      {...register("confirmPassword", {
                         validate:(val) =>{ //Do custom validations on react hook forms
                             if(!val){
