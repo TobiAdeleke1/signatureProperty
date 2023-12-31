@@ -9,9 +9,7 @@ export const AppContextProvider = ({children})=>{
 
     const { isError } = useQuery("validateToken", apiClient.validateToken, {
         retry:false,
-    });
-    // const isLoggedIn = !isError; // when there is now error validation was fine.
-    
+    });    
     return (<AppContext.Provider value={{isLoggedIn:!isError }}>
         {children}
     </AppContext.Provider>   

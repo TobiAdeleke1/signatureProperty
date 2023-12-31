@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState } from 'react';
 import {Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
@@ -6,6 +6,7 @@ import * as apiClient from '../api-client';
 
 export default function SignUp () {
     const navigate = useNavigate();
+    const [error, setError] = useState('');
     const { register, watch, handleSubmit, formState:{ errors } } = useForm();
 
 
@@ -17,6 +18,7 @@ export default function SignUp () {
         },
         onError: (error) =>{
             console.log(error.message);
+            setError(err.message); 
         },
     });
 
@@ -108,7 +110,7 @@ export default function SignUp () {
                     <span className='text-blue-700'> Sign In</span>
                 </Link>
             </div>
-           
+            {error && <p className='text-red-500 mt-5'>{error}</p>}
         </div>
     )
 }

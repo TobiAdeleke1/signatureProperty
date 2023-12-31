@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import {Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import * as apiClient from '../api-client';
 
 export default function SignIn () {
     const navigate = useNavigate();
-    const [error, setError] = useState('o');
+    const [error, setError] = useState('');
     const { register,  handleSubmit, formState:{ errors } } = useForm();
-
-    function handleSetErr(err){
-        setError(err.message);
-        console.log(error);
-    } 
+    const queryClient = useQueryClient();
+    
     // State is built to the mutation hook, so no need to manage useHook
     const mutation = useMutation(apiClient.signinClient, {
-        onSuccess: () =>{
+        onSuccess: async() =>{
             console.log("Login Successful!");
+            await queryClient.invalidateQueries("validateToken"); // reruns invalidate the specific token
             navigate("/");
         },
         onError: (err) =>{

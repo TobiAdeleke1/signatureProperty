@@ -1,7 +1,7 @@
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
-
+import SignOutButton from "./SignOutButton"; 
 
 export default function Header(){
     const { isLoggedIn } = useAppContext();
@@ -32,24 +32,15 @@ export default function Header(){
                         <li className="hidden sm:inline text-slate-700 hover:underline">Home </li>
                     </Link>
             
-                    {/* <Link to='/about'>
-                        <li className="hidden sm:inline text-slate-700 hover:underline">
-                        About 
-                        </li>
-                    </Link> */}
-            
+        
                     { isLoggedIn ? (<>
                         <Link to='/my-bookings'>
                             <li className="sm:inline text-slate-700 hover:underline"> 
                             My Bookings
                             </li>
                        </Link>
-                       {/* <Link to='/my-hotels'>
-                            <li className="sm:inline text-slate-700 hover:underline"> 
-                            My Hotels
-                            </li>
-                       </Link> */}
-                       <button> Sign out</button>
+                  
+                       <SignOutButton />
 
                     </> ): (
                         <>
@@ -64,23 +55,10 @@ export default function Header(){
                         </li>
                         </Link>
                     </>
-                    ) }
-                    
-               
-                {/* <Link to='/sign-in'>
-                      <li className="sm:inline text-slate-700 hover:underline"> 
-                      Sign In
-                      </li>
-                </Link> */}
-                {/* <Link to='/sign-up'>
-                      <li className="sm:inline text-slate-700 hover:underline"> 
-                      Sign Up
-                      </li>
-                </Link> */}
+                    ) }             
+             
                       
                 </ul>
-
-
             </div>
         </header>
     )

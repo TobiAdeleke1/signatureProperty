@@ -18,7 +18,7 @@ export const signupClient = async (formData) =>{
     if(!response.ok){
         throw new Error(responseBody.message);
     }
-}
+};
 
 export const signinClient = async (formData) =>{
     const response = await fetch(`${API_BASE_URL}/api/auth/signin`,{
@@ -36,11 +36,11 @@ export const signinClient = async (formData) =>{
     }
 
     return responseBody;
-}
+};
 
 export const validateToken = async () =>{
     const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`,{
-        credentials:"include"
+        credentials:"include",
     });
 
     if(!response.ok){
@@ -48,4 +48,15 @@ export const validateToken = async () =>{
     }
 
     return response.json();
-}
+};
+
+export const logoutClient = async()=>{
+    const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
+        credentials:"include",
+        method: "POST",
+    });
+
+    if(!response.ok){
+        throw new Error("Could Not Sign Out");
+    }
+};

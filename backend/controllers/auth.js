@@ -112,3 +112,11 @@ export const signin = [
 export const validtoken = (req, res) =>{
     res.status(200).send({userId: req.userId});
 }
+
+export const logout = (req, res)=>{
+    res.cookie("auth_token", "",{
+        expires: new Date(0),
+    });
+    res.status(200).json('User has been logged out!');
+
+};
