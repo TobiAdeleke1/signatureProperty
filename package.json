@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon backend/index.js",
-    "start": "node backend/index.js"
+    "start": "node backend/index.js",
+    "e2e": "cross-env DOTENV_CONFIG_PATH=.env.e2e nodemon backend/index.js"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,7 @@
     "mongoose": "^8.0.3"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^3.0.2"
   }
 }

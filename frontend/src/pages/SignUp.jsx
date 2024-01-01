@@ -1,19 +1,22 @@
 import React , { useState } from 'react';
 import {Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
+import { useMutation,useQueryClient } from 'react-query';
 import * as apiClient from '../api-client';
+
 
 export default function SignUp () {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const [error, setError] = useState('');
     const { register, watch, handleSubmit, formState:{ errors } } = useForm();
 
 
     // State is built to the mutation hook, so no need to manage useHook
     const mutation = useMutation(apiClient.signupClient, {
-        onSuccess: () =>{
+        onSuccess: async() =>{
             console.log("Registration Successful!");
+            await queryClient.invalidateQueries("validateToken");
             navigate("/sign-in");
         },
         onError: (error) =>{
@@ -82,7 +85,7 @@ export default function SignUp () {
                     Confirm Password
                     <input type='password'
                      className='border p-3 rounded-lg w-full'
-                     id='confirmpassword'
+                     id='confirmPassword'
                      {...register("confirmPassword", {
                         validate:(val) =>{ //Do custom validations on react hook forms
                             if(!val){

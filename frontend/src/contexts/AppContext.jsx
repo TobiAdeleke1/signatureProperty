@@ -7,10 +7,10 @@ const AppContext = React.createContext();
 
 export const AppContextProvider = ({children})=>{
 
-    const { isError } = useQuery("validateToken", apiClient.validateToken, {
+    const { isError, isLoading } = useQuery("validateToken", apiClient.validateToken, {
         retry:false,
     });    
-    return (<AppContext.Provider value={{isLoggedIn:!isError }}>
+    return (<AppContext.Provider value={{isLoggedIn:!isError && !isLoading }}>
         {children}
     </AppContext.Provider>   
   );

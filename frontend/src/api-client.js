@@ -38,13 +38,12 @@ export const signinClient = async (formData) =>{
     return responseBody;
 };
 
-export const validateToken = async () =>{
+export const validateToken = async() =>{
     const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`,{
         credentials:"include",
-    });
-
+    });    
     if(!response.ok){
-        throw new Error("Invalid Token");
+        throw new Error("Token Invalid");
     }
 
     return response.json();

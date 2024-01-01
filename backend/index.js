@@ -6,7 +6,7 @@ import authRouter from './routes/auth.js';
 // import userRouter from './routes/users.js';
 import cookieParser from "cookie-parser";
 
-dotenv.config();
+dotenv.config({path: process.env.DOTENV_CONFIG_PATH});
 
 mongoose.connect(process.env.DATABASE_URL).then(()=>{
     console.log("Connected to DB");

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export const verifyToken = (req, res, next) =>{
-    const token = req.cookies["auth_token"];
+    const token = req.cookies.auth_token;
     if(!token){ // first check if token exists
         return res.status(401).json({message:"Unauthorized"});
     }
@@ -12,6 +12,7 @@ export const verifyToken = (req, res, next) =>{
         req.userId = decoded.userId;
         next();  // to move to 
     }catch(error){
+        
         return res.status(403).json({message:"Forbidden"});
     }
 
