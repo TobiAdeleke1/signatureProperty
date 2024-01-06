@@ -47,6 +47,11 @@ export default function Header(){
                             My Bookings
                             </li>
                        </Link>
+                       <Link to='/my-properties'>
+                            <li className="sm:inline text-slate-700 hover:underline"> 
+                            My Properties
+                            </li>
+                       </Link>
                   
                        <SignOutButton />
 
