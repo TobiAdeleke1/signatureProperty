@@ -1,5 +1,5 @@
 // How to get/use environment variables in vite.
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 
 export const signupClient = async (formData) =>{
