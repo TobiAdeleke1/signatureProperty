@@ -1,20 +1,15 @@
 import React from 'react';
+import ManagePropertyForm from '../forms/ManagePropertyForm/ManagePropertyForm';
 
 export default function Properties () {
+
     return (
-       <main>
+        <main className='p-3 max-w-4xl mx-auto'>
+        
         <h1 className='text-3xl font-semibold text-center my-7'>
-         Add a Property
-        </h1>
-        <form className='flex flex-col sm:flex-row'>
-            <div className=''>
-                <input type='text' placeholder='Name'
-                 className='border p-3 rounded-lg focus:outline-none' id='name'
-                  maxLength='65' minLength='10' required/>
-            </div>
-
-
-        </form>
-       </main>
+          Add a Property
+         </h1>
+        <ManagePropertyForm />
+        </main>
     )
 }

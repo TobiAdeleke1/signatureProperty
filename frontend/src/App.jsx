@@ -7,8 +7,10 @@ import Profile from "./pages/Profile"
 import Header from "./components/Header"
 import Bookings from "./pages/Bookings"
 import Properties from "./pages/Properties"
+import { useAppContext } from "./contexts/AppContext"
 
 export default function App(){
+  const {isLoggedIn} = useAppContext();
   return (
   <BrowserRouter>
     <Header />
@@ -19,7 +21,10 @@ export default function App(){
       <Route path="/about" element={<About />}/>
       {/* <Route path="/profile" element={<Profile />} /> */}
       <Route path="/my-bookings" element={<Bookings />} />
-      <Route path="/my-properties" element={<Properties />} />
+      {isLoggedIn && <>
+        <Route path="/my-properties" element={<Properties />} />
+      </>}
+      
     </Routes>
   </BrowserRouter>
 
