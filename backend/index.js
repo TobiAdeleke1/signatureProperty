@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRouter from './routes/auth.js';
 // import userRouter from './routes/users.js';
+import propertyRouter from './routes/property.js';
 import cookieParser from "cookie-parser";
 import path from "path";
 import {v2 as cloudinary } from 'cloudinary';
@@ -36,6 +37,7 @@ app.use(cookieParser());
 
 
 app.use("/api/auth", authRouter);
+app.use("/api/property", propertyRouter);
 // app.use("/api/users", userRouter);
 
 app.use(express.static(path.join(__dirname, '/frontend/dist' )));
