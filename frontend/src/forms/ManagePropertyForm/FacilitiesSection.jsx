@@ -10,7 +10,7 @@ export default function FacilitiesSection (){
              <div className='grid grid-cols-3 gap-3 '>
                 {propertyFacilities.map((facilities)=>(
                 
-                    <label className='text-sm flex gap-2 text-gray-700'>
+                    <label key={facilities} className='text-sm flex gap-2 text-gray-700'>
                         <input className='w-4'
                             type="checkbox"
                             value={facilities} {...register("facilities",{

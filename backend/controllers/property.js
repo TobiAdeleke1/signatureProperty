@@ -7,6 +7,7 @@ export const createProperty = [
     body("address").notEmpty().withMessage("Address is required"),
     body("description").notEmpty().withMessage("Description is required"),
     body("type").notEmpty().withMessage("Property type is required"),
+    body("imageUrls").notEmpty().withMessage("Images are required"),
     body("pricePerNight")
         .notEmpty()
         .isNumeric()
