@@ -12,7 +12,6 @@ export default function ImagesSection (){
             <div className='flex gap-4'>
                 <input className='p-3 border border-gray-300 rounded w.full'
                     type='file' 
-                    id='images'
                     accept='image/*'
                     multiple
                     {...register('imageFiles', {
@@ -29,7 +28,7 @@ export default function ImagesSection (){
                         }
                     })}
                 />
-                <button className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80'> Upload</button>
+                {/* <button className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80'> Upload</button> */}
 
             </div>
             {errors.imageFiles && (

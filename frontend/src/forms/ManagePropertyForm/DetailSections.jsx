@@ -7,7 +7,7 @@ export default function DetailSection (){
     <div className='flex flex-col gap-4 flex-1'>
         <label className='text-slate-700 text-sm font-bold'>
         Name
-            <input type='name' className='border p-3 rounded-lg w-full focus:outline-none' maxLength='65' minLength='10'
+            <input type='name' className='border p-3 rounded-lg w-full focus:outline-none font-semibold' maxLength='65' minLength='10'
             id='name' {...register("name", {required: "This field is required"})}/>
             {errors.name && (
                 <span className='text-red-500'> {errors.name.message }</span>
@@ -19,7 +19,7 @@ export default function DetailSection (){
         Description
             <textarea 
             rows={6}
-            type='textarea' className='border p-3 rounded-lg w-full focus:outline-none'
+            type='textarea' className='border p-3 rounded-lg w-full focus:outline-none font-semibold'
             id='description' {...register("description", {required: "This field is required"})}> 
             </textarea>
 
@@ -30,7 +30,7 @@ export default function DetailSection (){
 
         <label className='text-slate-700 text-sm font-bold'>
         Address
-            <input type='text' className='border p-3 rounded-lg w-full focus:outline-none'
+            <input type='text' className='border p-3 rounded-lg w-full focus:outline-none font-semibold'
             id='address' {...register("address", {required: "This field is required"})}/>
             {errors.address && (
                 <span className='text-red-500'> {errors.address.message }</span>
@@ -46,7 +46,7 @@ export default function DetailSection (){
             <input
             type='number' 
             min={1}
-            className='border p-3 rounded-lg w-full focus:outline-none '
+            className='border p-3 rounded-lg w-full focus:outline-none font-semibold '
             id='pricePerNight' {...register("pricePerNight", {required: "This field is required"})}/>
             {errors.pricePerNight && (
                 <span className='text-red-500'> {errors.pricePerNight.message }</span>

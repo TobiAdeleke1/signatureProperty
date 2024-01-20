@@ -42,9 +42,9 @@ export default function FacilitiesSection (){
                     type='number' 
                     min={1}
                     className='border p-3 rounded-lg max-w-[50%] focus:outline-none '
-                    id='bathroom' {...register("bathroom", {required: "This field is required"})}/>
-                    {errors.bathroom && (
-                        <span className='text-red-500'> {errors.bathroom.message }</span>
+                    id='bedroom' {...register("bedroom", {required: "This field is required"})}/>
+                    {errors.bedroom && (
+                        <span className='text-red-500'> {errors.bedroom.message }</span>
                     ) }
                     <p className='py-3 font-semibold'>Bedrooms </p>
                 </label>

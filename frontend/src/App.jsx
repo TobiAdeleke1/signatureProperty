@@ -6,7 +6,7 @@ import SignUp from "./pages/SignUp"
 import Profile from "./pages/Profile"
 import Header from "./components/Header"
 import Bookings from "./pages/Bookings"
-import Properties from "./pages/Properties"
+import Properties from "./pages/AddProperties"
 import { useAppContext } from "./contexts/AppContext"
 
 export default function App(){
