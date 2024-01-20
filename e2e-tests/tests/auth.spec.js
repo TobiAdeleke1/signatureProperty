@@ -20,6 +20,7 @@ test('should allow the user to sign in', async ({ page }) => {
   // Now push button
   await page.getByRole("button", {name:"SIGN IN"}).click();
   await expect(page.getByRole("link", {name: "My Bookings"} )).toBeVisible();
+  await expect(page.getByRole("link", {name: "My Properties"} )).toBeVisible();
   await expect(page.getByRole("button", {name: "Sign out"})).toBeVisible();
 
 });
@@ -33,16 +34,15 @@ test("should allow user to register", async({ page })=>{
   await expect(page.getByRole("heading", {name: "Create An Account"})).toBeVisible();
   
   // Now want to fill in form
-  await page.locator("[name=firstName]").fill("test_firstName");
-  await page.locator("[name=lastName]").fill("test_lastName");
-  await page.locator("[name=email]").fill(testEmail);
-  await page.locator("[name=password]").fill("321password");
-  await page.locator("[name=confirmPassword]").fill("321password");
+  await page.locator("[name='firstName']").fill("test_firstName");
+  await page.locator("[name='lastName']").fill("test_lastName");
+  await page.locator("[name='email']").fill(testEmail);
+  await page.locator("[name='password']").fill("321password");
+  await page.locator("[name='confirmPassword']").fill("321password");
 
   await page.getByRole("button", {name: "SIGN UP"}).click();
 
-
-  await expect(page.getByRole("link", {name: "My Bookings"} )).toBeVisible();
+  await expect(page.getByRole("link", {name: "My Bookings"})).toBeVisible();
   await expect(page.getByRole("button", {name: "Sign out"})).toBeVisible();
 
 
