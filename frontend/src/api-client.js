@@ -21,7 +21,7 @@ export const signupClient = async (formData) =>{
     }
 };
 
-export const signinClient = async (formData) =>{
+export const signinClient = async(formData) =>{
     const response = await fetch(`${API_BASE_URL}/api/auth/signin`,{
         method: 'POST',
         credentials:"include",
@@ -59,4 +59,19 @@ export const logoutClient = async()=>{
     if(!response.ok){
         throw new Error("Could Not Sign Out");
     }
+};
+
+export const addProperty = async(propertyFormData)=>{
+    const response = await fetch(`${API_BASE_URL}/api/property/create`,{
+        method:"POST",
+        credentials:"include",
+        
+        body: propertyFormData
+    });
+    if(!response.ok){
+
+        throw new Error("Could not create property");
+    }
+
+    return response.json();
 };
