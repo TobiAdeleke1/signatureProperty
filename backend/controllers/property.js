@@ -21,6 +21,10 @@ export const createProperty = [
         .notEmpty()
         .isNumeric()
         .withMessage("Price per night is required and a number"),
+    body("starRating")
+        .notEmpty()
+        .isNumeric()
+        .withMessage("Rating is required and a number"),
     body("adultCount")
         .notEmpty()
         .isNumeric()

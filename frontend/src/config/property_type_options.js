@@ -10,6 +10,7 @@ export const propertyType = [
 export const propertyFacilities = [
     "Free Wifi",
     "Overground",
+    "Underground",
     "Parking",
     "Washing Machine",
     "Kitchen",

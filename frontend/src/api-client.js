@@ -65,8 +65,7 @@ export const addProperty = async(propertyFormData)=>{
     const response = await fetch(`${API_BASE_URL}/api/property/create`,{
         method:"POST",
         credentials:"include",
-        
-        body: propertyFormData
+        body: propertyFormData,
     });
     if(!response.ok){
 

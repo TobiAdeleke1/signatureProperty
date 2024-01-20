@@ -60,7 +60,7 @@ export default function ManagePropertyForm({onSave, isLoading }){
                 disabled={isLoading}
                 type="submit"
                 className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
-                 {isLoading ? "Saving...": " Create Property "}
+                 {isLoading ? "Saving...": "Create Property"}
 
                 </button>
             </div>
