@@ -9,15 +9,15 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import {v2 as cloudinary } from 'cloudinary';
 
+
+dotenv.config({path: process.env.DOTENV_CONFIG_PATH});
+
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
 
 });
-
-dotenv.config({path: process.env.DOTENV_CONFIG_PATH});
-
 mongoose.connect(process.env.DATABASE_URL).then(()=>{
     console.log("Connected to DB");
 });
