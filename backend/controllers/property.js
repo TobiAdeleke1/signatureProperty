@@ -1,6 +1,15 @@
 import Property from "../models/property.js";
-import cloudinary from 'cloudinary';
-import {body, validationResult} from 'express-validator';
+import cloudinary from "cloudinary";
+import multer from "multer";
+import {body} from 'express-validator';
+
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB
+  },
+});
 
 export const createProperty = [
     body("name").notEmpty().withMessage("Name is required"),
@@ -32,34 +41,34 @@ export const createProperty = [
         .notEmpty()
         .isArray()
         .withMessage("Facilities are required"),
-
-    async (req, res, next) => {
-        // TODO: s
-        const errors = validationResult(req);
-        if(!errors.isEmpty()){
-            return res.status(400).json({message: errors.array()})
-        }
+    upload.array("imageFiles", 6),
+    async(req, res, next) => {
         try{
+          
             const imagesFiles = req.files;
             const newProperty = req.body;
-            
+
+     
             //1.  Use async for uploading one at a time, and wait till all done
             const uploadPromises = imagesFiles.map(async(image) =>{
                 // Need to convert the iamge to base 64 to be processed by cloudinary ??
-                const b64 = Buffer.from(image.buffer).toString("base64");
+                const b64 = Buffer.from(image.buffer).toString("base64"); 
                 let dataURI= "data:"+image.mimetype+";base64,"+b64;
-                const res = await cloudinary.v2.uploader.upload(dataURI);
+                const resp = await cloudinary.v2.uploader.upload(dataURI);
+                return resp.url; 
+          
+            });
 
-                return res.url; // returns an array of promises
-            })
 
             //2. wait for all the promises to return
             const imageUrls = await Promise.all(uploadPromises);
+          
             // Update property objects
             newProperty.imageUrls = imageUrls;
             newProperty.lastUpdated = new Date();
             newProperty.userId = req.userId;
-
+            
+          
             const property = new Property(newProperty);
             await property.save();
 
@@ -70,9 +79,10 @@ export const createProperty = [
             });
 
         }catch(error){
-            console.log("Error creating hotel: ", error);
+            console.log("Error creating Property: ", error.message);
             res.status(500).json({message:"Internal Server Error" });
 
         }
     }
 ]
+
