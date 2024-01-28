@@ -35,11 +35,11 @@ export default function PropertyItem({property}){
 
                     </div>
                      <div className='text-slate-700 flex gap-8'>
-                        <div className='font-semibold text-s'>
+                        <div className='font-semibold text-sm'>
                             {property.bedroom > 1? `${property.bedroom} beds`: `${property.bedroom} bed` }
                             
                         </div>
-                        <div className='font-semibold text-s'>
+                        <div className='font-semibold text-sm'>
                             {property.bathroom > 1? `${property.bathroom} baths`: `${property.bathroom} bath` }
                             
                         </div>

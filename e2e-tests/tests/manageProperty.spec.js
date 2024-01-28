@@ -5,7 +5,7 @@ const UI_URL = "http://localhost:5173/";
 
 // Declares a beforeEach hook that is executed before each test.
 // also use {} to destruct the page 
-test.beforeEach(async({page})=>{
+test.beforeEach(async({ page })=>{
 
     await page.goto(UI_URL);
     await page.getByRole("link", {name: "Sign In"}).click();
@@ -20,7 +20,7 @@ test.beforeEach(async({page})=>{
 });
 
 /* TODO: Needs to be changed that only Admins/Staffs can add properties */
-test("should allow user to add a property", async({page })=>{
+test("should allow user to add a property", async({ page })=>{
     await page.goto(`${UI_URL}my-properties`);
 
     await page.locator('[name="name"]').fill("Test Property");
@@ -50,4 +50,16 @@ test("should allow user to add a property", async({page })=>{
     // Its has reset to add new property, instead of stuck in 'Saving ..' or redirect to page
     await expect(page.getByRole("button", {name:"Create Property"})).toBeVisible();
 
-})
+});
+
+test("should display all properties", async({ page }) =>{
+    await page.goto(`${UI_URL}all-properties`);
+
+    // Assert texts that should be on the list page
+    await expect(page.getByText("Salman Elegant Property")).toBeVisible();
+    await expect(page.getByText("We specialise in long-term rentals, Assured Shorthold tenancies")).toBeVisible();
+    await expect(page.getByText("beds").first()).toBeVisible();
+    await expect(page.getByText("Night").first()).toBeVisible();
+    await expect(page.getByText("baths").first()).toBeVisible();
+
+});
