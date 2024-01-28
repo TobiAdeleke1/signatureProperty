@@ -90,3 +90,18 @@ export const createProperty = [
     }
 ]
 
+export const allProperty = async(req, res) =>{
+
+    try{
+         // const properties = await Property.find({userId: req.userId});
+        const properties = await Property.find({});
+       
+       res.json(properties);
+
+    }catch(error){
+        res.status(500).json({message: "Error fetching Properties"});
+
+    }
+
+}
+

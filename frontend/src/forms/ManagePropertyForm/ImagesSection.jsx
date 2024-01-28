@@ -10,7 +10,7 @@ export default function ImagesSection (){
                 <p className='font-normal text-sm text-gray-600'> The first image will be the cover (max 6)</p>
             </h2>
             <div className='flex gap-4'>
-                <input className='p-3 border border-gray-300 rounded w.full'
+                <input className='p-3 border border-gray-300 rounded w-full'
                     type='file' 
                     accept='image/*'
                     multiple

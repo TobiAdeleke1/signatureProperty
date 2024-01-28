@@ -7,6 +7,7 @@ import Profile from "./pages/Profile"
 import Header from "./components/Header"
 import Bookings from "./pages/Bookings"
 import Properties from "./pages/AddProperties"
+import AllProperties from "./pages/Property"
 import { useAppContext } from "./contexts/AppContext"
 
 export default function App(){
@@ -19,9 +20,12 @@ export default function App(){
       <Route path="/sign-in" element={<SignIn />} />
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/about" element={<About />}/>
-      {/* <Route path="/profile" element={<Profile />} /> */}
-      <Route path="/my-bookings" element={<Bookings />} />
+      <Route path="/all-properties" element={<AllProperties />} />
+      <Route path="/profile" element={<Profile />} />
+     
       {isLoggedIn && <>
+        {/* <Route path="/all-properties" element={<AllProperties />} /> */}
+        <Route path="/my-bookings" element={<Bookings />} />
         <Route path="/my-properties" element={<Properties />} />
       </>}
       

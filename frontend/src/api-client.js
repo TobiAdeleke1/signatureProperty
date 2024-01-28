@@ -74,3 +74,13 @@ export const addProperty = async(propertyFormData)=>{
 
     return response.json();
 };
+
+export const getProperties = async()=>{
+    const response = await fetch(`${API_BASE_URL}/api/property/`,{
+        credentials:"include",
+    });
+    if(!response.ok){
+        throw new Error("Error getting properties");
+    }
+    return response.json();
+};

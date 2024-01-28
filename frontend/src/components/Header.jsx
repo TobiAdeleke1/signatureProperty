@@ -67,6 +67,11 @@ export default function Header(){
                         Sign In
                         </li>
                         </Link>
+                        <Link to='/all-properties'>
+                            <li className="sm:inline text-slate-700 hover:underline"> 
+                             Properties
+                            </li>
+                       </Link>
                     </>
                     ) }             
              
