@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import DetailSection from './DetailSections';
 import TypeSection from './TypeSection';
@@ -6,17 +6,27 @@ import FacilitiesSection from './FacilitiesSection';
 import GuestSection from './GuestSection';
 import ImagesSection from './ImagesSection';
 
-// Using props with for
 
-export default function ManagePropertyForm({onSave, isLoading }){
-    const formMethods = useForm(); // Using form hook
-    const { handleSubmit } = formMethods; // deconstructed from fromMethods
+export default function ManagePropertyForm({onSave, isLoading, property}){
+    const formMethods = useForm(); 
+    const { handleSubmit , reset} = formMethods; 
+    
+    useEffect(() =>{
+        reset(property); 
+    }, [property, reset ]);
+    let buttonName = "Create Property";
+    if(property){ // for use by the Edit
+        
+        buttonName = "Update Property";
+      };
 
     const onSubmit = handleSubmit((jsonFormData) => {
-         // Need to convert the json from the frontend, 
-         // to something that can be sent to the backend api
-          console.log("jsonFormData: "+jsonFormData);
+
           const formData = new FormData();
+          if(property){ // for use by the Edit
+            formData.append("propertyId", property._id);
+          };
+
           formData.append("name", jsonFormData.name);
           formData.append("address", jsonFormData.address);
           formData.append("description", jsonFormData.description);
@@ -34,6 +44,14 @@ export default function ManagePropertyForm({onSave, isLoading }){
           jsonFormData.facilities.forEach((facility, index)=>{
                 formData.append(`facilities[${index}]`, facility);
           })
+
+          // For use by eixit property, add so the Backend is properly updated with most updated
+          if(jsonFormData.imageUrls){
+            jsonFormData.imageUrls.forEach((url, index)=>{
+                 formData.append(`imageUrls[${index}]`,url);
+            })
+
+          }
           
           // The imageUrls is of form FileList, so need to create an array from it
           // in order to get access to the .forEach method for parsing 
@@ -60,7 +78,7 @@ export default function ManagePropertyForm({onSave, isLoading }){
                 disabled={isLoading}
                 type="submit"
                 className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
-                 {isLoading ? "Saving...": "Create Property"}
+                 {isLoading ? "Saving...": buttonName}
 
                 </button>
             </div>
@@ -68,7 +86,5 @@ export default function ManagePropertyForm({onSave, isLoading }){
          </form>
 
         </FormProvider>
-      
-        
      );
 }

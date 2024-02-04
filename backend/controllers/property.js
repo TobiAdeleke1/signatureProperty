@@ -48,34 +48,16 @@ export const createProperty = [
     upload.array("imageFiles", 6),
     async(req, res, next) => {
         try{
-          
             const imagesFiles = req.files;
             const newProperty = req.body;
-
-     
-            //1.  Use async for uploading one at a time, and wait till all done
-            const uploadPromises = imagesFiles.map(async(image) =>{
-                // Need to convert the iamge to base 64 to be processed by cloudinary ??
-                const b64 = Buffer.from(image.buffer).toString("base64"); 
-                let dataURI= "data:"+image.mimetype+";base64,"+b64;
-                const resp = await cloudinary.v2.uploader.upload(dataURI);
-                return resp.url; 
-          
-            });
-
-
-            //2. wait for all the promises to return
-            const imageUrls = await Promise.all(uploadPromises);
+            const imageUrls = await uploadImages(imagesFiles);
           
             // Update property objects
             newProperty.imageUrls = imageUrls;
             newProperty.lastUpdated = new Date();
             newProperty.userId = req.userId;
-            
-          
             const property = new Property(newProperty);
             await property.save();
-
 
             return res.status(201).json({
                 success:true,
@@ -103,5 +85,76 @@ export const allProperty = async(req, res) =>{
 
     }
 
-}
+};
 
+export const getProperty = async(req, res) =>{
+
+    const propertyId = req.params.id; 
+    try{
+        const property = await Property.findById({
+            _id:propertyId
+        });
+        res.json(property);
+    }catch(error){
+        res.status(500).json({message: "Error fetching Properties"});
+
+    }
+
+};
+
+export const updateProperty = [
+    upload.array("imageFiles"), // using multer
+    async(req, res) =>{
+        try{
+            const updateProperty = req.body;
+            updateProperty.lastUpdated = new Date();
+            const propertyId = req.params.propertyId; 
+
+            const property = await Property.findOneAndUpdate({
+                _id: propertyId
+            },
+             updateProperty,
+              {new:true}
+            );
+
+            if(!property){
+                return res.status(404).json({message: "Property not found"});
+
+            }
+            
+            // Get newly added image files to upload to cloundary
+            const files = req.files;
+            const updatedImageUrls = await uploadImages(files);
+            
+            // Spread the returned URLs into new images with the existing ones
+            property.imageUrls = [
+                ...updatedImageUrls,
+                ...(updateProperty.imageUrls || []),
+            ];
+
+            // And if all goes well, save the property created from the property
+            await property.save(); 
+            res.status(201).json(property);
+
+        }catch(error){
+            res.status(500).json({message:"Internal Server Error"});
+        }
+    }
+]
+
+async function uploadImages(imagesFiles) {
+     //1.  Use async for uploading one at a time, and wait till all done
+    const uploadPromises = imagesFiles.map(async (image) => {
+        // Need to convert the iamge to base 64 to be processed by cloudinary ??
+        const b64 = Buffer.from(image.buffer).toString("base64");
+        let dataURI = "data:" + image.mimetype + ";base64," + b64;
+        const resp = await cloudinary.v2.uploader.upload(dataURI);
+        return resp.url;
+
+    });
+
+
+    //2. wait for all the promises to return
+    const imageUrls = await Promise.all(uploadPromises);
+    return imageUrls;
+}

@@ -84,3 +84,42 @@ export const getProperties = async()=>{
     }
     return response.json();
 };
+
+export const getPropertyById = async(propertyId) =>{
+    const response = await fetch(`${API_BASE_URL}/api/property/${propertyId}`,{
+        credentials: "include",
+    });
+
+    if(!response.ok){
+        throw new Error("Error getting property");
+    }
+    return response.json();
+};
+
+export const updatePropertyById = async(propertyFormData) =>{
+    console.log()
+    const response = await fetch(
+      `${API_BASE_URL}/api/property/${propertyFormData.get("propertyId")}`,
+      {
+        method: "PUT",
+        body: propertyFormData,
+        credentials: "include",
+      }  
+    );
+
+    if(!response.ok){
+        throw new Error("Failed to update Property");
+    }
+
+    return response.json();
+}
+// export const editPropertyById = async(propertyId) =>{
+//     const response = await fetch(`${API_BASE_URL}/api/property/edit/${propertyId}`,{
+//         credentials: "include",
+//     });
+
+//     if(!response.ok){
+//         throw new Error("Error getting property");
+//     }
+//     return response.json();
+// };
