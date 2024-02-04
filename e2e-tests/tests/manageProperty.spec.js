@@ -63,3 +63,24 @@ test("should display all properties", async({ page }) =>{
     await expect(page.getByText("baths").first()).toBeVisible();
 
 });
+
+test("should edit property", async({ page }) => {
+    await page.goto(`${UI_URL}all-properties`);
+
+    await page.getByAltText("property-cover").first().click();
+    await page.waitForSelector('[name="name"]', {state: "attached"});
+    await expect(page.locator('[name="name"]')).toHaveValue("London Luxury Property");
+    await page.locator('[name="name"]').fill("London Luxury Property- Updated");
+
+    await page.getByRole("button", {name:"UPDATE PROPERTY"}).click();
+    await expect(page.getByText("Properties")).toBeVisible();
+
+    await page.getByAltText("property-cover").first().click();
+    await expect(page.locator('[name="name"]')).toHaveValue("London Luxury Property- Updated");
+    await page.locator('[name="name"]').fill("London Luxury Property");
+    await page.getByRole("button", {name:"UPDATE PROPERTY"}).click();
+
+
+
+
+});
