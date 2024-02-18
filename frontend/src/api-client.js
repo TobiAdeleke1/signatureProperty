@@ -97,7 +97,6 @@ export const getPropertyById = async(propertyId) =>{
 };
 
 export const updatePropertyById = async(propertyFormData) =>{
-    console.log()
     const response = await fetch(
       `${API_BASE_URL}/api/property/${propertyFormData.get("propertyId")}`,
       {
@@ -111,6 +110,27 @@ export const updatePropertyById = async(propertyFormData) =>{
         throw new Error("Failed to update Property");
     }
 
+    return response.json();
+}
+
+export const searchProperty = async(searchParams) =>{
+    // Build the query to send to the backend api
+    const queryParams = new URLSearchParams();
+    queryParams.append("destination", searchParams.destination || "");
+    queryParams.append("checkIn", searchParams.checkIn || "");
+    queryParams.append("checkOut", searchParams.checkOut || "");
+    queryParams.append("adultCount", searchParams.adultCount || "");
+    queryParams.append("childCount", searchParams.childCount || "");
+    queryParams.append("bedroom", searchParams.bedroom || "");
+    queryParams.append("bathroom", searchParams.bathroom || "");
+    queryParams.append("page", searchParams.page || "");
+
+    const response = await fetch(`${API_BASE_URL}/api/findproperty/search?${queryParams}`);
+
+    if(!response){
+        throw new Error("Error Fetching Properties");
+    }
+    
     return response.json();
 }
 // export const editPropertyById = async(propertyId) =>{

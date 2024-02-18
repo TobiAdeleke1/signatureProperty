@@ -9,6 +9,7 @@ import Bookings from "./pages/Bookings"
 import Properties from "./pages/AddProperties"
 import AllProperties from "./pages/Property"
 import EditProperty from "./pages/EditProperty"
+import Search from "./pages/Search"
 import { useAppContext } from "./contexts/AppContext"
 
 export default function App(){
@@ -23,7 +24,7 @@ export default function App(){
       <Route path="/about" element={<About />}/>
       <Route path="/profile" element={<Profile />} />
       <Route path="/all-properties" element={<AllProperties />} />
-     
+      <Route path="/search" element={<Search/>}/>
        
      {isLoggedIn && <>
         {/* <Route path="/all-properties" element={<AllProperties />} /> */}
