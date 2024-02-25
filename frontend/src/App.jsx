@@ -11,6 +11,7 @@ import AllProperties from "./pages/Property"
 import EditProperty from "./pages/EditProperty"
 import Search from "./pages/Search"
 import { useAppContext } from "./contexts/AppContext"
+import Details from "./pages/Details"
 
 export default function App(){
   const {isLoggedIn} = useAppContext();
@@ -25,11 +26,12 @@ export default function App(){
       <Route path="/profile" element={<Profile />} />
       <Route path="/all-properties" element={<AllProperties />} />
       <Route path="/search" element={<Search/>}/>
+      <Route path="/detail/:propertyId" element={<Details/>} />
        
      {isLoggedIn && <>
         {/* <Route path="/all-properties" element={<AllProperties />} /> */}
         <Route path="/edit-property/:propertyId" element={<EditProperty />} />
-        <Route path="/my-bookings" element={<Bookings />} />
+        <Route path="/property/:propertyId/booking" element={<Bookings />} />
         <Route path="/my-properties" element={<Properties />} />
       </>}
       

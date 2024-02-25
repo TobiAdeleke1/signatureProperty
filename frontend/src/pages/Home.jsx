@@ -45,7 +45,7 @@ export default function Home () {
 
             </div>
   
-            <div className='p-3 mx-auto max-w-2xl'>
+            <div className='p-3 mx-auto max-w-5xl'>
             <div className='flex flex-wrap gap-8'>
                 {propertyData.map((property)=>( 
                     <PropertyItem key={property._id} property={property} />
