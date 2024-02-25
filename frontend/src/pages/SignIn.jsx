@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link, useNavigate } from 'react-router-dom'
+import {Link, useNavigate, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import * as apiClient from '../api-client';
@@ -9,13 +9,15 @@ export default function SignIn () {
     const [error, setError] = useState('');
     const { register,  handleSubmit, formState:{ errors } } = useForm();
     const queryClient = useQueryClient();
+    const location = useLocation();
     
     // State is built to the mutation hook, so no need to manage useHook
     const mutation = useMutation(apiClient.signinClient, {
         onSuccess: async() =>{
             console.log("Login Successful!");
             await queryClient.invalidateQueries("validateToken"); // reruns invalidate the specific token
-            navigate("/");
+            // use state for if user already was on a specific page 
+            navigate(location.state?.from?.pathname || "/");
         },
         onError: (err) =>{
             console.log(err);

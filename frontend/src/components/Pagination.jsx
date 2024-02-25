@@ -12,9 +12,14 @@ export default function Pagination({page, pages, onPageChange}){
         <div className="flex justify-center">
             <ul className="flex border border-slate-300">
                 {pageNumbers.map((number) =>(
-                    <li className={`px-2 py-1 ${page === number ? "bg-grey-200":" "}`}>
-                        <button onClick={()=>onPageChange(number)}> {number}</button>
-
+                    <li className={`px-2 py-1 ${page === number ? "bg-gray-200":" "}`}>
+                        <button 
+                           className="bg-transparent"
+                           onClick={()=>onPageChange(number)}
+                           >
+                           {number}
+       
+                        </button>
                     </li>
                 ))}
 

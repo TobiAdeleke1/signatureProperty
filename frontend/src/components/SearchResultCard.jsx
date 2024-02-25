@@ -30,7 +30,7 @@ export default function SearchResultCard({property}){
                         </span>
                     </div>
                     <Link to={`/detail/${property._id}`} className="text-2xl font-bold cursor-pointer"> 
-                    {property.name}
+                        {property.name}
                     </Link>
 
                 </div>
@@ -59,7 +59,6 @@ export default function SearchResultCard({property}){
                                 <Link to={`/detail/${property._id}`} className="bg-slate-700 text-white h-full p-2 font-bold text-xl max-w-fit hover:opacity-80">
                                     View More
                                 </Link>
-
                         </div>
                 </div>
             </div>
