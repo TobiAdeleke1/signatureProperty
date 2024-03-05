@@ -1,8 +1,11 @@
-// import express from 'express';
-// import { signup } from '../controllers/user.js';
+import express from 'express';
+import { verifyToken } from '../middleware/auth.js';
+import { userDetails } from '../controllers/user.js';
 
-// const router = express.Router();
+const router = express.Router();
 
-// // router.post("/signup", signup)
 
-// export default router;
+router.get("/me", verifyToken, userDetails);
+
+
+export default router;

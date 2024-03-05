@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bookingSchema from './booking.js';
 
 const propertySchema = new mongoose.Schema(
     {   
@@ -12,16 +13,16 @@ const propertySchema = new mongoose.Schema(
         },
         description: {
             type: String,
-            required: true,
+            required: true
 
         },
         address:{
             type:String,
-            required: true,
+            required: true
         },
         type: {
             type:String,
-            required: true,
+            required: true
         },
         adultCount: {
             type: Number,
@@ -61,7 +62,8 @@ const propertySchema = new mongoose.Schema(
         lastUpdated:{
             type:Date,
             required:true
-        }
+        },
+        bookings: [bookingSchema], // One to many
    },
    {timestamps: true}
 );
