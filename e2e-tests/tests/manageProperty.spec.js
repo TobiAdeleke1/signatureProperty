@@ -80,7 +80,7 @@ test("should edit property", async({ page }) => {
     await page.locator('[name="name"]').fill("London Luxury Property");
     await page.getByRole("button", {name:"UPDATE PROPERTY"}).click();
 
-
-
-
 });
+
+
+
