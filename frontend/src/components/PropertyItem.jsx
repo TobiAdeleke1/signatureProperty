@@ -12,8 +12,8 @@ export default function PropertyItem({property}){
         // <div className='flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5'></div>
             <div className='flex flex-row justify-between border bg-white rounded-lg p-4 gap-4 overflow-hidden w-full'>
             <div className='flex flex-col gap-4 flex-1'>
-            {/* <Link to={'/edit'}> */}
-                <Link  to={isLoggedIn ? `/edit-property/${property._id}`:`/property/${property._id}`}>
+            {/* <Link to={'/edit'}>  to={isLoggedIn ? `/edit-property/${property._id}`:`/property/${property._id}`}*/}
+                <Link  to={isLoggedIn ? `/edit-property/${property._id}`:`/detail/${property._id}`}>
                 <img src={property.imageUrls[0]} alt='property-cover' className='h-[300px] sm:h[200px] w-full object-cover hover:scale-105 transition-scale duration-300 '/>
                 </Link>
             </div>

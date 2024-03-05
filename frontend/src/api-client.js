@@ -1,6 +1,17 @@
 // How to get/use environment variables in vite.
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
+export const getCurrentUser = async() =>{
+    const response = await fetch(`${API_BASE_URL}/api/users/me`,{
+        credentials: "include"
+    });
+
+    if(!response.ok){
+        throw new Error("Error fetching User");
+    }
+    
+    return response.json();
+};
 
 export const signupClient = async (formData) =>{
     // Fetch request to the server 
@@ -96,6 +107,16 @@ export const getPropertyById = async(propertyId) =>{
     return response.json();
 };
 
+// Duplicate endpoint might remove 
+export const getCurrentPropertyById = async(propertyId) =>{
+    const response = await fetch(`${API_BASE_URL}/api/property/${propertyId}`,{
+    });
+    if(!response.ok){
+        throw new Error("Error getting property");
+    }
+    return response.json();
+};
+
 export const updatePropertyById = async(propertyFormData) =>{
     const response = await fetch(
       `${API_BASE_URL}/api/property/${propertyFormData.get("propertyId")}`,
@@ -111,7 +132,7 @@ export const updatePropertyById = async(propertyFormData) =>{
     }
 
     return response.json();
-}
+};
 
 export const searchProperty = async(searchParams) =>{
     // Build the query to send to the backend api
@@ -132,7 +153,49 @@ export const searchProperty = async(searchParams) =>{
     }
     
     return response.json();
-}
+};
+
+export const createPaymentIntent = async( 
+    propertyId,
+    numberOfNights 
+    )=>{
+    const response = await fetch(
+        `${API_BASE_URL}/api/property/${propertyId}/bookings/payment-intent`,
+        {
+            credentials: "include",
+            method: "POST",
+            body: JSON.stringify({numberOfNights}),
+            headers:{
+                "Content-Type": "application/json",
+            }
+        }
+        );
+        if(!response.ok){
+            throw new Error("Errors fetching payment intent");
+        }
+
+        
+    return response.json();
+};
+
+export const createPropertyBooking = async( propertyFormData) =>{
+
+  const response = await fetch(`${API_BASE_URL}/api/property/${propertyFormData.propertyId}/bookings`,
+  {
+    method: "POST",
+    headers: {
+        "Content-Type":"application/json",
+    },
+    credentials:"include",
+    body: JSON.stringify(propertyFormData),
+  })
+
+  if(!response.ok){
+    throw new Error("Error booking room");
+  }
+
+};
+
 // export const editPropertyById = async(propertyId) =>{
 //     const response = await fetch(`${API_BASE_URL}/api/property/edit/${propertyId}`,{
 //         credentials: "include",
