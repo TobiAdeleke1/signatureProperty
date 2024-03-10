@@ -14,10 +14,15 @@ export const AppContextProvider = ({children})=>{
         retry:false,
     });    
 
+    const { isLoading:isRoleLoading, data: userAdminRole} = useQuery("userRole", apiClient.getUserRole, {
+        retry:false,
+    });
+
     return (<AppContext.Provider 
            value={{
             isLoggedIn:!isError && !isLoading,
-            stripePromise:stripePromise
+            stripePromise:stripePromise,
+            isUserAdmin:!isRoleLoading && userAdminRole.userAdmin
             }}
            >
         {children}

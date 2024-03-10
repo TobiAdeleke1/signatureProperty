@@ -10,11 +10,14 @@ import Properties from "./pages/AddProperties"
 import AllProperties from "./pages/Property"
 import EditProperty from "./pages/EditProperty"
 import Search from "./pages/Search"
+import MyBookings from "./pages/MyBookings";
 import { useAppContext } from "./contexts/AppContext"
 import Details from "./pages/Details"
 
 export default function App(){
-  const {isLoggedIn} = useAppContext();
+  const {isLoggedIn, isUserAdmin} = useAppContext();
+  console.log("In the App File, is admin",isUserAdmin);
+
   return (
   <BrowserRouter>
     <Header />
@@ -25,15 +28,21 @@ export default function App(){
       <Route path="/about" element={<About />}/>
       <Route path="/profile" element={<Profile />} />
       <Route path="/all-properties" element={<AllProperties />} />
-      <Route path="/search" element={<Search/>}/>
-      <Route path="/detail/:propertyId" element={<Details/>} />
+      <Route path="/search" element={<Search />}/>
+      <Route path="/detail/:propertyId" element={<Details />} />
        
      {isLoggedIn && <>
-        {/* <Route path="/all-properties" element={<AllProperties />} /> */}
-        <Route path="/edit-property/:propertyId" element={<EditProperty />} />
+        <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="/property/:propertyId/booking" element={<Bookings />} />
-        <Route path="/my-properties" element={<Properties />} />
+        {/* <Route path="/my-properties" element={<Properties />} /> */}
       </>}
+
+      {isLoggedIn && isUserAdmin && <>
+        {/* <Route path="/my-bookings" element={<MyBookings />} /> */}
+        <Route path="/edit-property/:propertyId" element={<EditProperty />} />
+        {/* <Route path="/property/:propertyId/booking" element={<Bookings />} /> */}
+        <Route path="/my-properties" element={<Properties />} />
+      </> }
       
     </Routes>
   </BrowserRouter>

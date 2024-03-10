@@ -3,21 +3,21 @@ import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 import { AiFillStar } from "react-icons/ai";
 import GuestInfoForm from "../forms/GuestInfoForm/GuestInfoForm";
-
+import { useAppContext } from "../contexts/AppContext";
 
 export default function Details() {
+    const { isUserAdmin } = useAppContext();
     const { propertyId} = useParams();
     const {data:property} = useQuery(
         "fetchPropertyById",
         () => apiClient.getCurrentPropertyById(propertyId || ""),
         {enabled: !!propertyId} // prevent request unless the id is present
     );
-    // Add conditions to take care of delay in response from the database
-    // instead of errors 
+  
     if(!property){
        return <></>
     }
-    // Using grid to b e able to stack the property details in rows
+   
 
     return (
         <div className="space-y-6 mt-4 p-3">
@@ -62,7 +62,15 @@ export default function Details() {
                       propertyId={property._id}
                       pricePerNight={property.pricePerNight}
                        />
-                </div>  
+                </div> 
+
+                
+                {isUserAdmin && 
+                   ( <Link to={ `/edit-property/${property._id}`} className="bg-slate-700 text-white h-full p-2 font-bold text-xl max-w-fit hover:opacity-80">
+                      Edit Property
+                    </Link>)
+                    
+                } 
 
             </div>
         </div>

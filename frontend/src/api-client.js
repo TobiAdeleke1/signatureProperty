@@ -13,6 +13,18 @@ export const getCurrentUser = async() =>{
     return response.json();
 };
 
+export const getUserRole = async() =>{
+    const response = await fetch(`${API_BASE_URL}/api/users/user-role`,{
+        credentials: "include"
+    });
+
+    if(!response.ok){
+        throw new Error("Error fetching User Role");
+    }
+
+    return response.json();
+};
+
 export const signupClient = async (formData) =>{
     // Fetch request to the server 
     //  automatic stringify the body of the request to JSON
@@ -60,6 +72,7 @@ export const validateToken = async() =>{
 
     return response.json();
 };
+
 
 export const logoutClient = async()=>{
     const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
@@ -196,6 +209,17 @@ export const createPropertyBooking = async( propertyFormData) =>{
 
 };
 
+export const fetchMyBooking = async() =>{
+    const response = await fetch(`${API_BASE_URL}/api/my-bookings`,{
+        credentials:"include",
+    })
+
+    if(!response.ok){  
+        throw new Error("Could not fetch bookings")
+    }
+
+    return response.json();
+}
 // export const editPropertyById = async(propertyId) =>{
 //     const response = await fetch(`${API_BASE_URL}/api/property/edit/${propertyId}`,{
 //         credentials: "include",

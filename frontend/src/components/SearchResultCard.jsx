@@ -2,10 +2,12 @@ import React from "react";
 import { AiFillStar } from "react-icons/ai"
 import { Link } from "react-router-dom";
 
+
 export default function SearchResultCard({property}){
     // New Learning: Component with pop
     //cursor-pointer allows text to redirect to new pages
     // Use tailwinds line-clamp-4 for automatic truncation
+    
     return (
         <div className="grid grid-col-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-8 gap-8">
             <div className="w-full h-[300px]">

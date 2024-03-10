@@ -20,29 +20,29 @@ test.beforeEach(async({ page })=>{
 
 });
 
-// test("should show property search results", async({ page }) =>{
-//     await page.goto(UI_URL);
+test("should show property search results", async({ page }) =>{
+    await page.goto(UI_URL);
 
-//     await page.getByPlaceholder("Where are you going?").fill("London");
-//     await page.getByRole("button", {name:"Search"}).click();
+    await page.getByPlaceholder("Where are you going?").fill("London");
+    await page.getByRole("button", {name:"Search"}).click();
 
-//     await expect(page.getByText("Properties Found in London")).toBeVisible();
-//     await expect(page.getByText("Salman Elegant Property")).toBeVisible();
-// });
+    await expect(page.getByText("Properties Found in London")).toBeVisible();
+    await expect(page.getByText("Salman Elegant Property")).toBeVisible();
+});
 
 
-// test("should show property detail", async({ page })=>{
+test("should show property detail", async({ page })=>{
 
-//     await page.goto(UI_URL);
+    await page.goto(UI_URL);
 
-//     await page.getByPlaceholder("Where are you going?").fill("London");
-//     await page.getByRole("button", {name:"Search"}).click();
-//     await page.getByText("Salman Elegant Property").click();
+    await page.getByPlaceholder("Where are you going?").fill("London");
+    await page.getByRole("button", {name:"Search"}).click();
+    await page.getByText("Salman Elegant Property").click();
     
-//     await expect(page).toHaveURL(/detail/);
-//     await expect(page.getByRole("button", {name:"Book now"})).toBeVisible();
-
-// });
+    await expect(page).toHaveURL(/detail/);
+    await expect(page.getByRole("button", {name:"Book now"})).toBeVisible();
+   
+});
 
 
 
@@ -76,6 +76,9 @@ test("should book property", async({page})=>{
     await stripeFrame.locator('[placeholder="ZIP"]').fill("12121");
 
     await page.getByRole("button", {name:"Confirm Booking"}).click();
-    await expect(page).toHaveURL('http://localhost:5173/search');
+    await expect(page.getByText("My Bookings")).toBeVisible();
+
+    await page.getByRole("link", {name: "My Bookings"}).click();
+    await expect(page.getByText("Salman Elegant Property")).toBeVisible();
 
 });

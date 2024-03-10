@@ -16,7 +16,7 @@ export default function BookingForm( {currentUser, paymentIntent }){
     const { mutate:bookProperty, isLoading } = useMutation(apiClient.createPropertyBooking, {
         onSuccess:()=>{
           console.log("Booking Saved");
-          navigate("/search")
+          navigate("/my-bookings")
         },
         onError: (error) => {
             console.log("Booking Failed", error);

@@ -4,7 +4,7 @@ import { useAppContext } from "../contexts/AppContext";
 import SignOutButton from "./SignOutButton"; 
 
 export default function Header(){
-    const { isLoggedIn } = useAppContext();
+    const { isLoggedIn, isUserAdmin } = useAppContext();
  
     return (
         <header className='bg-slate-200 shadow-md' >
@@ -12,8 +12,7 @@ export default function Header(){
             <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
                <Link to='/'>
                  <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-                    {/* <span className='text-slate-500'>Solomon</span> */}
-                    <span className='text-slate-500'>Signature</span>
+                    <span className='text-slate-500'>Solomon</span>
                     <span className='text-slate-700'>Property</span>
                  </h1>
                 </Link>
@@ -28,15 +27,13 @@ export default function Header(){
 
                 <ul className="flex gap-4">
                
-                    {/* <Link to='/'>
-                        <li className="hidden sm:inline text-slate-700 hover:underline">Home </li>
-                    </Link> */}
+                    <Link to='/'>
+                            <li className="hidden sm:inline text-slate-700 hover:underline">Home </li>
+                    </Link>
             
         
                     { isLoggedIn ? (<>
-                        <Link to='/'>
-                            <li className="hidden sm:inline text-slate-700 hover:underline">Home </li>
-                        </Link>
+                        
                         <Link to='/about'>
                             <li className="hidden sm:inline text-slate-700 hover:underline">
                             About 
@@ -47,33 +44,29 @@ export default function Header(){
                             My Bookings
                             </li>
                        </Link>
-                       <Link to='/my-properties'>
-                            <li className="sm:inline text-slate-700 hover:underline"> 
-                            My Properties
-                            </li>
-                       </Link>
+                      
                   
                        <SignOutButton />
 
-                    </> ): (
+                        </> )
+                        : (
                         <>
-                        {/* <Link to='/about'>
-                        <li className="hidden sm:inline text-slate-700 hover:underline">
-                        About 
-                        </li>
-                        </Link> */}
+                  
                         <Link to='/sign-in'>
                         <li className="sm:inline text-slate-700 hover:underline"> 
                         Sign In
                         </li>
                         </Link>
-                        {/* <Link to='/all-properties'>
+                      
+                      </>
+                    ) }         
+
+                    {isUserAdmin && 
+                     <Link to='/my-properties'>
                             <li className="sm:inline text-slate-700 hover:underline"> 
-                             Properties
+                            My Properties
                             </li>
-                       </Link> */}
-                    </>
-                    ) }             
+                       </Link> }    
              
                       
                 </ul>
