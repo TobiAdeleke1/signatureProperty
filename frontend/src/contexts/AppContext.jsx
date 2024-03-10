@@ -22,7 +22,7 @@ export const AppContextProvider = ({children})=>{
            value={{
             isLoggedIn:!isError && !isLoading,
             stripePromise:stripePromise,
-            isUserAdmin:!isRoleLoading && userAdminRole.userAdmin
+            isUserAdmin:!isRoleLoading && userAdminRole?.userAdmin
             }}
            >
         {children}
