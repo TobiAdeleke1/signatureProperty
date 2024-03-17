@@ -222,7 +222,7 @@ export const fetchMyBooking = async() =>{
 }
 
 export const getBookingMinDate = async(propertyId) =>{
-    console.log("In request", propertyId);
+ 
     const response = await fetch(`${API_BASE_URL}/api/bookings/mindate/${propertyId}`,{
       
     });

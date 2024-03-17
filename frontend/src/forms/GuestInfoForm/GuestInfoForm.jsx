@@ -166,11 +166,7 @@ export default function GuestInfoForm({propertyId, pricePerNight, lastestBooking
                             Sign in to book </button>)
                             
                         }
-
-                        
-
-
-                        
+       
                     </div>
                 </form>
            

@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 body{
-    /* background-color: rgb(241, 245,241); */
     background-color: rgb(237, 224, 212);
 }
 
 button{
     background-color: rgb(241, 245,241);
 }
+

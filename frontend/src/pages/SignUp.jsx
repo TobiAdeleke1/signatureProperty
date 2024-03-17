@@ -101,7 +101,7 @@ export default function SignUp () {
                     ) }
                 </label>   
               
-              <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 
+              <button className='bg-coffee-dark text-white p-3 rounded-lg uppercase hover:opacity-95 
               disabled:opacity-80'> 
                SIGN UP 
               </button>
