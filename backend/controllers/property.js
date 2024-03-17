@@ -54,7 +54,7 @@ export const createProperty = [
         .isArray()
         .withMessage("Facilities are required"),
     upload.array("imageFiles", 6),
-    async(req, res, next) => {
+    async(req, res) => {
         try{
             const imagesFiles = req.files;
             const newProperty = req.body;
@@ -83,10 +83,9 @@ export const createProperty = [
 export const allProperty = async(req, res) =>{
 
     try{
-         // const properties = await Property.find({userId: req.userId});
         const properties = await Property.find({});
        
-       res.json(properties);
+        res.json(properties);
 
     }catch(error){
         res.status(500).json({message: "Error fetching Properties"});

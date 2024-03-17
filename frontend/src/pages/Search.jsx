@@ -59,10 +59,9 @@ export default function Search(){
                     {propertyData?.pagination.totalDocument} Properties Found
                     {search.destination ? ` in ${search.destination}`: '' }
                 </span>
-                {/* TODO: SORT options */}
-
+      
               </div>
-            {/* TODO: Build the searchcomponent */}
+          
             {propertyData?.data.map((property)=>(
               
                 <SearchResultCard key={property._id} property={property}/>

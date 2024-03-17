@@ -210,7 +210,7 @@ export const createPropertyBooking = async( propertyFormData) =>{
 };
 
 export const fetchMyBooking = async() =>{
-    const response = await fetch(`${API_BASE_URL}/api/my-bookings`,{
+    const response = await fetch(`${API_BASE_URL}/api/bookings/my-bookings`,{
         credentials:"include",
     })
 
@@ -220,13 +220,17 @@ export const fetchMyBooking = async() =>{
 
     return response.json();
 }
-// export const editPropertyById = async(propertyId) =>{
-//     const response = await fetch(`${API_BASE_URL}/api/property/edit/${propertyId}`,{
-//         credentials: "include",
-//     });
 
-//     if(!response.ok){
-//         throw new Error("Error getting property");
-//     }
-//     return response.json();
-// };
+export const getBookingMinDate = async(propertyId) =>{
+    console.log("In request", propertyId);
+    const response = await fetch(`${API_BASE_URL}/api/bookings/mindate/${propertyId}`,{
+      
+    });
+
+    if(!response.ok){  
+        throw new Error("Could not fetch bookings")
+    }
+
+    return response.json();
+
+}

@@ -2,15 +2,14 @@ import React, { useState} from 'react';
 import { useSearchContext } from '../contexts/SearchContext';
 import { MdTravelExplore } from 'react-icons/md';
 import  DatePicker from 'react-datepicker';
-// Use Datepicker default style sheet
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from 'react-router-dom';
 
 
 
 export default function SearchBar(){
+
     const search = useSearchContext();
-    // To redirect to nevigate page
     const navigate = useNavigate();
 
 
@@ -20,8 +19,7 @@ export default function SearchBar(){
     const [checkOut, setCheckOut] = useState(search.checkOut);
     const [adultCount, setAdultCount] = useState(search.adultCount);
     const [childCount, setChildCount] = useState(search.childCount);
-    const [bedroom, setBedroom] = useState(search.bedroom);
-    const [bathroom, setBathroom] = useState(search.bathroom);
+
    
     const handleSubmit = (event)=>{
         // to stop immediate changes/ post reques default behaviour of a form
@@ -33,8 +31,7 @@ export default function SearchBar(){
             checkOut,
             adultCount,
             childCount,
-            bedroom,
-            bathroom
+
         );
         navigate("/search");
     };
@@ -42,8 +39,7 @@ export default function SearchBar(){
     const maxDate = new Date();
     // Set the max date as a year from now
     maxDate.setFullYear(maxDate.getFullYear() + 1);
-    // To edit settings based on screen size
-    // grid grid-col-2 lg:grid-cols-3 2xl:grid-cols-5 
+
     return(
         <form onSubmit={handleSubmit} className="-mt-8 p-3 bg-slate-400 rounded shadow-md grid grid-col-2 2xl:grid-cols-5 items-center gap-4">
          <div className='flex flex-row items-center flex-1 bg-white p-2'>
@@ -84,37 +80,6 @@ export default function SearchBar(){
 
             </label>
          </div>
-
-         {/* <div className='flex bg-white px-2 py-1 gap-3'>
-
-            <label className='items-center flex'>
-              Bedrooms:
-              <input
-               className='w-full p-1 focus:outline-none font-bold'
-               type="number"
-               min={1} 
-               max={20}
-               value={bedroom}
-               onChange={(event) => setBedroom(parseInt(event.target.value))}
-               />
-               
-
-            </label>
-
-            <label className='items-center flex'>
-              Bathrooms:
-              <input
-               className='w-full p-1 focus:outline-none font-bold'
-               type="number"
-               min={1} 
-               max={20}
-               value={bathroom}
-               onChange={(event) => setBathroom(parseInt(event.target.value))}
-               />
-               
-
-            </label> 
-         </div> */}
 
 
          <div>

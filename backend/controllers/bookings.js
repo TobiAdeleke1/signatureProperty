@@ -34,3 +34,36 @@ export const bookings = async(req, res) =>{
   } 
  
 };
+
+export const minbookingDate = async(req, res) =>{
+
+  const propertyId = req.params.id;
+   
+  
+  try{
+ 
+    
+    const property = await Property.findById({
+      _id:propertyId
+    });
+
+    
+    if(!property){
+      return res.status(400).json({message: "Property not found"});
+    } 
+    
+    
+    const resultBookingDate = property.bookings.map((booking) =>{
+      const checkoutDate = new Date(booking.checkOut);
+      return checkoutDate;
+    });
+  
+   
+   const maxBoookingdate = new Date(Math.max(...resultBookingDate));
+   
+    res.status(200).send({maxcurrentdate:maxBoookingdate});
+  }catch(error){
+    console.log(error);
+    res.status(500).json({message:"No Booking on this property yet"})
+  }
+};

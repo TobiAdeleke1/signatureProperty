@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
 import { MdLocationOn } from 'react-icons/md';
+import { useAppContext } from "../contexts/AppContext";
 
 export default function PropertyItem({property}){
+    const { isUserAdmin } = useAppContext();
    
     return (
       
@@ -41,9 +43,31 @@ export default function PropertyItem({property}){
                         </div>
 
                     </div>
-
-
+                    <div className="flex flex-col items-end gap-1">
+                      {isUserAdmin && 
+                        <Link to={`/edit-property/${property._id}`} className="bg-slate-700 text-white h-full p-2 font-bold text-xl max-w-fit hover:opacity-80">
+                        Edit Property
+                        </Link>
                    
+
+                    
+                      } 
+                      </div>
+
+                      <div className="flex flex-col items-end gap-1">
+                      {isUserAdmin  ?
+                        <Link to={`/edit-property/${property._id}`} className="bg-slate-700 text-white h-full p-2 font-bold text-xl max-w-fit hover:opacity-80">
+                        Edit Property
+                        </Link>
+                        :
+                        <Link to={`/detail/${property._id}`} className="bg-coffee-dark text-white h-full p-2 font-bold text-xl max-w-fit hover:opacity-80">
+                            Book Now
+                        </Link>
+
+                    
+                      } 
+                      </div>
+          
                 </div>
             
             </div>

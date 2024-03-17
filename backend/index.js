@@ -43,7 +43,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/property", propertyRouter);
 app.use("/api/findproperty", searchPropertyRouter);
 app.use("/api/users", userRouter);
-app.use("/api/my-bookings", bookingRouter);
+app.use("/api/bookings", bookingRouter);
+
 
 app.use(express.static(path.join(__dirname, '/frontend/dist' )));
 app.get("*", (req, res) =>{

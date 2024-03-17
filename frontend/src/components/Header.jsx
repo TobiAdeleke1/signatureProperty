@@ -7,7 +7,7 @@ export default function Header(){
     const { isLoggedIn, isUserAdmin } = useAppContext();
  
     return (
-        <header className='bg-slate-200 shadow-md' >
+        <header className='bg-coffee-light shadow-md' >
            
             <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
                <Link to='/'>
@@ -17,13 +17,13 @@ export default function Header(){
                  </h1>
                 </Link>
                 
-                <form className='bg-slate-100 p-3 rounded-lg flex items-center'>
+                {/* <form className='bg-slate-100 p-3 rounded-lg flex items-center'>
                     <input
                      type="text" 
                      placeholder='Search...' 
                      className='bg-transparent focus:outline-none w-24 sm:w-64'/>
                     <FaSearch className="text-slate-600"/>
-                </form>
+                </form> */}
 
                 <ul className="flex gap-4">
                

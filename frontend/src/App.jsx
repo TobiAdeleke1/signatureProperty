@@ -16,7 +16,7 @@ import Details from "./pages/Details"
 
 export default function App(){
   const {isLoggedIn, isUserAdmin} = useAppContext();
-  console.log("In the App File, is admin",isUserAdmin);
+
 
   return (
   <BrowserRouter>
@@ -34,11 +34,11 @@ export default function App(){
      {isLoggedIn && <>
         <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="/property/:propertyId/booking" element={<Bookings />} />
-        {/* <Route path="/my-properties" element={<Properties />} /> */}
+        
       </>}
 
       {isLoggedIn && isUserAdmin && <>
-        {/* <Route path="/my-bookings" element={<MyBookings />} /> */}
+      
         <Route path="/edit-property/:propertyId" element={<EditProperty />} />
         {/* <Route path="/property/:propertyId/booking" element={<Bookings />} /> */}
         <Route path="/my-properties" element={<Properties />} />

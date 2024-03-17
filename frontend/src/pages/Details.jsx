@@ -3,17 +3,24 @@ import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 import { AiFillStar } from "react-icons/ai";
 import GuestInfoForm from "../forms/GuestInfoForm/GuestInfoForm";
-import { useAppContext } from "../contexts/AppContext";
+
 
 export default function Details() {
-    const { isUserAdmin } = useAppContext();
     const { propertyId} = useParams();
+   
     const {data:property} = useQuery(
         "fetchPropertyById",
         () => apiClient.getCurrentPropertyById(propertyId || ""),
         {enabled: !!propertyId} // prevent request unless the id is present
     );
-  
+
+    const {data: propertyMinDate} = useQuery(
+        "getCurrentBookingDate", 
+       () => apiClient.getBookingMinDate(propertyId.toString() || ""),
+       {enabled: !!propertyId} 
+   );
+
+
     if(!property){
        return <></>
     }
@@ -24,7 +31,11 @@ export default function Details() {
             <div>
                 <span className="flex">
                  {Array.from({length : property.starRating }).map(() =>(
-                    <AiFillStar className="fill-yellow-400"/>
+                    <AiFillStar 
+                      
+                      className="fill-yellow-400"
+
+                      />
                  ))}
                 </span>
                 <h1 className="text-3xl font-bond">
@@ -59,18 +70,14 @@ export default function Details() {
                 </div>      
                 <div className="h-fit">
                     <GuestInfoForm 
+                      
                       propertyId={property._id}
                       pricePerNight={property.pricePerNight}
+                      lastestBookingDate= {propertyMinDate?.maxcurrentdate}
                        />
                 </div> 
 
-                
-                {isUserAdmin && 
-                   ( <Link to={ `/edit-property/${property._id}`} className="bg-slate-700 text-white h-full p-2 font-bold text-xl max-w-fit hover:opacity-80">
-                      Edit Property
-                    </Link>)
-                    
-                } 
+            
 
             </div>
         </div>
