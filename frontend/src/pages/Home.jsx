@@ -15,10 +15,24 @@ export default function Home () {
 
     if(!propertyData){
         return (
-            <div className='p-7'>
-                 <p className='text-xl text-slate-700 text-center'> No Available Property </p>
-            </div>
-           
+             <div>
+    
+        <div className='flex flex-col gap-6 p-28 px-3  mx-auto bg-coffee-dark'>
+    
+        <h1 className='text-slate-700 font-bold text-3xl lg:text-6xl'>
+          Find your next stay with <br />
+            <span className='text-slate-500'>Solomon Property </span>
+          
+
+        </h1>
+        <div className='text-gray-400 text-xs sm:text-sm'>
+         Find your next perfect short term stay.
+          <br />
+          We have a wide range of properties for you to choose from.
+        </div>
+   
+      </div>
+      </div>
         )
     }
 
